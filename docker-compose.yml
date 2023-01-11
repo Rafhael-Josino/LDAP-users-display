@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  app:
+    build: ./ldap_client/
+    container_name: ldap_client
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    networks:
+      - app-tier
+    volumes:
+      - ./ldap_client:/usr/app
+
+  web:
+    build: ./ldap-frontend/
+    container_name: ldap-frontend
+    ports:
+      - 3000:3000
+    networks:
+      - app-tier
+    volumes:
+      - ./ldap-frontend:/app

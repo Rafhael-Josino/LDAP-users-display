@@ -1,0 +1,91 @@
+* {
+    box-sizing: border-box;
+}
+
+.header {
+    background-color: skyblue;
+    width: 100vw;
+    height: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.container-header {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 15px;
+    width: 60vw;
+    margin: auto;
+}
+
+.header-title {
+    color: white;
+    font-size: xx-large;
+}
+
+.container_userList {
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    margin: auto;
+}
+
+.container_filters {
+    height: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container_filter_submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter_submenu_element {
+    background-color: skyblue;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: large;
+    height: 2rem;
+    padding: 0.4rem;
+}
+
+.vpnUser {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.1rem 0.5rem 0.1rem 0.5rem;
+}
+
+.vpnUser.menu {
+    background-color: skyblue;
+    color: white;
+    font-size: large;
+}
+
+.vpnUser.contrast {
+    background-color: antiquewhite;
+}
+
+.vpnUser.error {
+    background-color: gray;
+}
+
+a.filter_submenu_element:hover {
+    color: blue;
+}
+
+
+select:hover {
+    cursor: pointer;
+}
+
+.spinner-block {
+    height: 200px;
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+}

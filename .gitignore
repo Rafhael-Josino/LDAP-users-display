@@ -1,0 +1,7 @@
+ldap_client/logs/
+ldap_client/.env
+ldap_client/node_modules/
+
+ldap_frontend/public/logo-intranet.png
+ldap_frontend/node_modules/
+ldap_client\ldap_frontend\src\components\OMselector.tsx
