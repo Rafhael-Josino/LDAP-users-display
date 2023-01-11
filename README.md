@@ -24,3 +24,10 @@ Requests a lists of user per barrack from a list of the barracks's ID numbers sa
 filter the list displayed by the time of access, e.g., show only the users that access in seven days.
 
 As expressed before, it can also save the displayed users in a CSV file.
+
+# TO DO
+
+- Save the barracks IDs in the backend and add resource of add and delete an ID (here we considerate that the 
+specific list of barracks IDs cannot be retrieved from the LDAP server);
+- Verify the implementation of some use of cache, so the application does not have to always make a new request
+to the LDAP server when a new list must be displayed
