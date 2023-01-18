@@ -1,28 +1,26 @@
-version: '3.7'
-
-networks:
-  app-tier:
-    driver: bridge
+version: '3.8'
 
 services:
   app:
     build: ./ldap_client/
     container_name: ldap_client
-    expose:
-      - 8000
-    ports:
-      - 8000:8000
-    networks:
-      - app-tier
     volumes:
-      - ./ldap_client:/usr/app
+      - ./ldap_client:/app
 
   web:
     build: ./ldap-frontend/
     container_name: ldap-frontend
-    ports:
-      - 3000:3000
-    networks:
-      - app-tier
     volumes:
+      - /app/node_modules
       - ./ldap-frontend:/app
+
+  nginx:
+      depends_on:
+        - app
+        - web
+      restart: always
+      build: 
+        dockerfile: Dockerfile
+        context: ./Nginx
+      ports:
+        - 3050:80
