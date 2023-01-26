@@ -52,12 +52,12 @@ const searchUsersByGroup = async (client: ldap.Client, group: string): Promise<a
 
 type GroupAndOM = {
     group: string,
-    BarrackCode: string,
+    barrackCode: string,
 }
 
 // Get users list by group and barrack
 const searchUsersByGroupAndBarrack = async (client: ldap.Client, req: GroupAndOM): Promise<any> => {
-    const { group, BarrackCode } = req;
+    const { group, barrackCode } = req;
 
     const promise = new Promise((resolve, reject) => {
         client.search(`cn=${group},ou=groups,dc=21ct,dc=eb,dc=mil,dc=br`, {}, (err, res) => {
@@ -68,7 +68,7 @@ const searchUsersByGroupAndBarrack = async (client: ldap.Client, req: GroupAndOM
                         await promise2;
                         const user = await searchUserByUid(client, memberUid);
                         if (user) {
-                            if (user.gidNumber === BarrackCode) users.push(user);
+                            if (user.gidNumber === barrackCode) users.push(user);
                         }
                     },
                     Promise.resolve()
@@ -81,4 +81,4 @@ const searchUsersByGroupAndBarrack = async (client: ldap.Client, req: GroupAndOM
     return await promise;
 }
 
-export { searchStrangeNamesByGroup, searchUserByUid, searchUsersByGroup, searchUsersByGroupAndBarrack };
+export { searchStrangeNamesByGroup, searchUserByUid, searchUsersByGroup, searchUsersByGroupAndBarrack };""
