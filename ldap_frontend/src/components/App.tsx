@@ -1,15 +1,14 @@
+import React from "react";
 import Header from "./Header";
-import Home from '../pages/Home';
+import AppRoutes from "../routes";
 
 function App() {
-    return (
-        <div>
-            <Header />
-            <main>
-                <Home />
-            </main>
-        </div>
-    )
+    return <React.Fragment>
+        <Header />
+        <main>
+            <AppRoutes />
+        </main>
+    </React.Fragment>
 }
 
 export default App;

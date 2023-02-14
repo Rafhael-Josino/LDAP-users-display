@@ -1,47 +1,53 @@
-import { useState, useEffect } from 'react';
-import { requestVPNusers } from '../actions';
-import UsersList from '../components/UsersList';
-import Spinner from '../components/Spinner';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { saveLogCSV } from '../actions';
 
 function Home() {
-    const [usersList, setUsersList] = useState([]);
-    const [selectedBarrack, setSelectedBarrack] = useState('0');
-    const [loadingState, setLoadingState] = useState(true);
+    const [file, setFile] = useState<File>();
 
-    useEffect(() => {
-        setLoadingState(true);
-    }, [selectedBarrack]);
+    const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('test new archive')
 
-    useEffect(() => {
-        const requestVPNusersAction = async () => {
-            const res = await requestVPNusers(selectedBarrack);
-
-            if (typeof res === 'string') {
-                console.log('Error getting user list');
-                setUsersList([]);
-            } else {
-                setUsersList(res);
-            }
-        }
-
-        requestVPNusersAction();
-    }, [loadingState])
-
-    useEffect(() => {
-        setLoadingState(false);
-    }, [usersList])
-
-    const setSelectedBarrackHelper = async (OMcode: string): Promise<void> => {
-        setSelectedBarrack(OMcode);
+        const files = event.target.files as FileList;
+        setFile(files[0]);
     }
 
-    return loadingState ? 
-        <Spinner /> : 
-        <UsersList 
-            usersList={usersList} 
-            selectedBarrack={selectedBarrack} 
-            setSelectedBarrackHelper={setSelectedBarrackHelper}
-        />
+    const handleOnSubmit = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('log', file as File);
+
+        const res = await saveLogCSV(formData);
+
+        console.log(res);
+    }
+
+    return <section className='container-home'>
+        <div className='item'>
+            <Link to='vpnUsers'>Carregar log salvo</Link>
+            <Link to='VPNLog'>Ver log salvo</Link>
+        </div>
+
+        <br/>
+
+        <form className="item">
+            <button 
+                className='form-item'
+                onClick={event => handleOnSubmit(event)}
+            >
+                Carregar nova planilha de log
+            </button>
+            
+            <input 
+                className='form-item'
+                type='file'
+                accept='.csv'
+                name='log' 
+                onChange={event => handleOnChange(event)}
+            />
+        </form>
+    </section>
 }
 
 export default Home;
