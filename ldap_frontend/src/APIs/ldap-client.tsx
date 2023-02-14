@@ -1,6 +1,9 @@
 import axios from 'axios';
 
+const baseURL = 'http://localhost:8000/'
+
 export default axios.create({
-    baseURL: 'http://10.122.7.234:8000/' // change onto a env variable
-    //baseURL: 'ldap_client:8000/'
+    baseURL,
 });
+
+export { baseURL };

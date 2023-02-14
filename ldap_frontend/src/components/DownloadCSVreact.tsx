@@ -14,7 +14,7 @@ function DownloadCSVreact(props: Props) {
 
     return (
         <div className='container_filter_submenu'>
-            <div className="filter_submenu_element">{vpnUsers.length} users found</div>
+            <span className="filter_submenu_element">Upload CSV log</span>
             <CSVLink data={vpnUsers} className="filter_submenu_element">Download CSV file</CSVLink>
         </div>
     )
