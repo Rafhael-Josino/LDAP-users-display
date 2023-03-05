@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getSavedLog } from "../actions";
 import Spinner from '../components/Spinner';
+import ListNavigator from '../components/ListNavigator';
+
 
 function VPNLog() {
     const [log, setLog] = useState<{
@@ -27,7 +29,7 @@ function VPNLog() {
 
     useEffect(() => {
         setWindowIndex(1);
-    }, [windowSize])
+    }, [windowSize]);
 
     const renderedLog = [<div className='vpnUser menu vpnHeader' key={-1}>
         <span>Nome</span>
@@ -57,32 +59,19 @@ function VPNLog() {
         setWindowSize(Number(event.target.value));
     }
 
-    const loadedPage = <div>
-        {renderedLog}
-        <div className='vpnUser menu vpnHeader'>
-            Page {Math.floor(windowIndex/windowSize)+1}/{Math.ceil(log.length/windowSize)}
+    return <section className='container_userList'>
+       <ListNavigator 
+            setWindowSizeHandler={setWindowSizeHandler}
+            previousPage={previousUsersPage}
+            nextPage={nextUsersPage}
+            page={Math.floor(windowIndex/windowSize)+1}
+            lastPage={Math.ceil(log.length/windowSize)}
+         />
+
+        <div>
+            {log.length ? renderedLog : <Spinner />}
         </div>
-    </div>
-
-    return <main>
-        <nav>
-            <Link to='/'>Return</Link>
-            <div className='nav2'>
-                <span>Usuários por página:</span>
-                <select onChange={(e) => setWindowSizeHandler(e)}>
-                    <option value={10}>10</option>
-                    <option value={50}>50</option>
-                    <option value={100}>100</option>
-                </select>
-                <button onClick={previousUsersPage}>{'<'}</button>
-                <button onClick={nextUsersPage}>{'>'}</button>
-            </div>
-        </nav>
-
-        <section>
-            {log.length ? loadedPage : <Spinner />}
-        </section>
-    </main>
+    </section >
 }
 
 export default VPNLog;

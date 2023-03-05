@@ -16,7 +16,7 @@ function Home() {
         event.preventDefault();
 
         const formData = new FormData();
-        formData.append('log', file as File);
+        formData.append('wholeList', file as File);
 
         const res = await saveLogCSV(formData);
 
@@ -25,8 +25,8 @@ function Home() {
 
     return <section className='container-home'>
         <div className='item'>
-            <Link to='vpnUsers'>Carregar log salvo</Link>
-            <Link to='VPNLog'>Ver log salvo</Link>
+            <Link to='vpnUsers'>Load VPN log of LDAP users</Link>
+            <Link to='VPNLog'>Load VPN server's data</Link>
         </div>
 
         <br/>
