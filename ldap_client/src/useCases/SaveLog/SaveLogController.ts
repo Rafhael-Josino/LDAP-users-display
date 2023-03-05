@@ -1,12 +1,9 @@
-import { Request, Response } from 'express';
-import SaveLogUseCase from './SaveLogUseCase';
+import { Request, Response } from "express";
 
-async function SaveLogController(req: Request, res: Response): Promise<Response> {
-    const formData = req.file;
+async function SaveLogVPNController(req: Request, res: Response): Promise<Response> {
+    console.log(req.file);
 
-    await SaveLogUseCase(formData);
-
-    return res.send();
+    return res.status(204).send();
 }
 
-export default SaveLogController;
+export default SaveLogVPNController;

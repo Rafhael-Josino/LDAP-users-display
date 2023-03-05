@@ -7,7 +7,7 @@ type VPNusersType = {
     lastAccess: string,
 }
 
-async function saveUsersFile (VPNusers: VPNusersType[]): Promise<any> {
+async function SaveUsersFile (VPNusers: VPNusersType[]): Promise<any> {
     const fileName = join(__dirname, '..', '..', 'logs', 'out.csv');
     
     const csvWriter = createObjectCsvWriter({
@@ -22,4 +22,4 @@ async function saveUsersFile (VPNusers: VPNusersType[]): Promise<any> {
     await csvWriter.writeRecords(VPNusers);
 }
 
-export { saveUsersFile }
+export { SaveUsersFile }
