@@ -7,9 +7,9 @@ type LastAccessType = {
 }
 
 async function GetVPNusersController(req: Request, res: Response): Promise<Response> {
-    const { barrackCode, fileName } = req.params;
-
-    const VPNusers: LastAccessType[] = await GetVPNusersUseCase(barrackCode, fileName);
+    const { barrackCode } = req.params;
+    
+    const VPNusers: LastAccessType[] = await GetVPNusersUseCase(barrackCode);
     
     return res.json({ VPNusers });
 }

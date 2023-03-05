@@ -7,9 +7,14 @@ type LastAccessType = {
     lastAccess: string,
 }
 
-async function GetVPNusersUseCase(barrackCode: string, fileName: string): Promise<LastAccessType[]> {
+/**
+ * This will be changed when the databank is done
+ * instead of pull both CSV and LDAP data and merge it, it will pull the ready data from the databank
+ */
+
+async function GetVPNusersUseCase(barrackCode: string): Promise<LastAccessType[]> {
     // Getting log information from CSV file
-    const vpnLogs = await VPNLogsReader(fileName);
+    const vpnLogs = await VPNLogsReader();
 
     // Getting VPN users registered on LDAPconnect server
     const vpnUsers = await LDAP.query(searchUsersByGroupAndBarrack, { group: 'vpn', barrackCode });
